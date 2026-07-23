@@ -35,11 +35,19 @@
       </article>
     </section>
     <section id="game-view" class="view" hidden>
-      <div class="status"><div><strong id="trial-label">Trial 1 / 24</strong><div class="track"><span id="progress-bar"></span></div></div><div class="badges"><span id="n-badge">2-back</span><span id="score-badge">Score —</span></div></div>
-      <article class="trial-card"><p class="overline">INFER THE HIDDEN RULE</p><div id="series" class="series" aria-live="polite" aria-atomic="true"></div><p class="instruction">Infer and retain the pattern internally. Do not enter the missing number or name the rule.</p></article>
-      <article id="memory-card" class="memory-card"><div><p class="overline">PATTERN N-BACK</p><h2 id="memory-question">Does this rule match the rule from 2 trials ago?</h2><p id="warmup-note"></p></div><div class="match-options"><button data-match="true" type="button">Pattern match</button><button data-match="false" type="button">Different pattern</button></div></article>
-      <div id="feedback" class="feedback" hidden aria-live="polite"></div>
-      <div class="actions game-actions"><button id="end-game" class="text" type="button">End session</button><button id="submit-answer" class="primary" type="button" disabled>Check response</button><button id="next-trial" class="primary" type="button" hidden>Next trial</button></div>
+      <div class="game-layout">
+        <div class="game-main">
+          <div class="status"><div><strong id="trial-label">Trial 1 / 24</strong><div class="track"><span id="progress-bar"></span></div></div><div class="badges"><span id="n-badge">2-back</span><span id="score-badge">Score —</span></div></div>
+          <article class="trial-card"><p class="overline">INFER THE HIDDEN RULE</p><div id="series" class="series" aria-live="polite" aria-atomic="true"></div><p class="instruction">Infer and retain the pattern internally. Do not enter the missing number or name the rule.</p></article>
+          <article id="memory-card" class="memory-card"><div><p class="overline">PATTERN N-BACK</p><h2 id="memory-question">Does this rule match the rule from 2 trials ago?</h2><p id="warmup-note"></p></div><div class="match-options"><button data-match="true" type="button">Pattern match</button><button data-match="false" type="button">Different pattern</button></div></article>
+          <div id="feedback" class="feedback" hidden aria-live="polite"></div>
+          <div class="actions game-actions"><button id="end-game" class="text" type="button">End session</button><button id="submit-answer" class="primary" type="button" disabled>Check response</button><button id="next-trial" class="primary" type="button" hidden>Next trial</button></div>
+        </div>
+        <aside class="live-results-panel" aria-label="Live trial results">
+          <div class="live-results-heading"><p class="overline">TRIAL RESULTS</p><h2>Live record</h2><p>Results append from the top as each scored trial completes.</p></div>
+          <div id="live-trial-results" class="live-trial-results" aria-live="polite"></div>
+        </aside>
+      </div>
     </section>
     <section id="summary-view" class="view" hidden>
       <article class="summary">
@@ -51,6 +59,6 @@
     <section id="progress-view" class="view" hidden><div class="heading"><p class="overline">LOCAL PROGRESS</p><h1>Completed sessions</h1><p>Progress records only abstract pattern n-back accuracy.</p></div><div id="history-list" class="history-list"></div></section>
     <footer>Prototype rule families: constant addition, constant subtraction, multiplication, and division.</footer>
   </main>
-  <script type="module" src="./app-v6.js"></script>
+  <script type="module" src="./app-v7.js"></script>
 </body>
 </html>
