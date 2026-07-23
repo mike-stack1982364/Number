@@ -41,10 +41,16 @@
       <div id="feedback" class="feedback" hidden aria-live="polite"></div>
       <div class="actions game-actions"><button id="end-game" class="text" type="button">End session</button><button id="submit-answer" class="primary" type="button" disabled>Check response</button><button id="next-trial" class="primary" type="button" hidden>Next trial</button></div>
     </section>
-    <section id="summary-view" class="view" hidden><article class="summary"><p class="overline">SESSION COMPLETE</p><h1 id="summary-heading">Pattern memory measured</h1><div id="total-score" class="total-score">0%</div><div id="summary-grid" class="summary-grid"></div><p id="summary-note"></p><div class="actions"><button id="train-again" class="primary" type="button">Train again</button><button data-view="progress" class="secondary" type="button">View progress</button></div></article></section>
+    <section id="summary-view" class="view" hidden>
+      <article class="summary">
+        <p class="overline">SESSION COMPLETE</p><h1 id="summary-heading">Pattern memory measured</h1><div id="total-score" class="total-score">0%</div><div id="summary-grid" class="summary-grid"></div><p id="summary-note"></p>
+        <section class="trial-audit-section"><p class="overline">TRIAL AUDIT</p><h2>Every scored trial</h2><div id="trial-audit" class="trial-audit"></div></section>
+        <div class="actions"><button id="train-again" class="primary" type="button">Train again</button><button data-view="progress" class="secondary" type="button">View progress</button></div>
+      </article>
+    </section>
     <section id="progress-view" class="view" hidden><div class="heading"><p class="overline">LOCAL PROGRESS</p><h1>Completed sessions</h1><p>Progress records only abstract pattern n-back accuracy.</p></div><div id="history-list" class="history-list"></div></section>
     <footer>Prototype rule families: constant addition, constant subtraction, multiplication, and division.</footer>
   </main>
-  <script type="module" src="./app-v5.js"></script>
+  <script type="module" src="./app-v6.js"></script>
 </body>
 </html>
