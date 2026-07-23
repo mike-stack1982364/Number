@@ -36,6 +36,10 @@
     </section>
     <section id="game-view" class="view" hidden>
       <div class="game-layout">
+        <aside class="live-results-panel" aria-label="Live trial results">
+          <div class="live-results-heading"><p class="overline">TRIAL RESULTS</p><h2>Live record</h2><p>Results append from the top as each scored trial completes.</p></div>
+          <div id="live-trial-results" class="live-trial-results" aria-live="polite"></div>
+        </aside>
         <div class="game-main">
           <div class="status"><div><strong id="trial-label">Trial 1 / 24</strong><div class="track"><span id="progress-bar"></span></div></div><div class="badges"><span id="n-badge">2-back</span><span id="score-badge">Score —</span></div></div>
           <article class="trial-card"><p class="overline">INFER THE HIDDEN RULE</p><div id="series" class="series" aria-live="polite" aria-atomic="true"></div><p class="instruction">Infer and retain the pattern internally. Do not enter the missing number or name the rule.</p></article>
@@ -43,10 +47,6 @@
           <div id="feedback" class="feedback" hidden aria-live="polite"></div>
           <div class="actions game-actions"><button id="end-game" class="text" type="button">End session</button><button id="submit-answer" class="primary" type="button" disabled>Check response</button><button id="next-trial" class="primary" type="button" hidden>Next trial</button></div>
         </div>
-        <aside class="live-results-panel" aria-label="Live trial results">
-          <div class="live-results-heading"><p class="overline">TRIAL RESULTS</p><h2>Live record</h2><p>Results append from the top as each scored trial completes.</p></div>
-          <div id="live-trial-results" class="live-trial-results" aria-live="polite"></div>
-        </aside>
       </div>
     </section>
     <section id="summary-view" class="view" hidden>
