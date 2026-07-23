@@ -14,7 +14,6 @@
       <button id="home-button" class="brand" type="button"><span>NP</span><strong>Number Pattern N-Back</strong></button>
       <nav><button data-view="home" type="button">Home</button><button data-view="play" type="button">Play</button><button data-view="progress" type="button">Progress</button></nav>
     </header>
-
     <section id="home-view" class="view">
       <article class="hero">
         <div><p class="overline">PROOF OF PRINCIPLE</p><h1>Remember the rule,<br />not the numbers.</h1><p class="lead">Each trial presents a four-number series with one missing value. Solve it, then decide whether its generating pattern matches the pattern from n trials ago.</p><div class="actions"><button id="begin-button" class="primary" type="button">Configure session</button></div></div>
@@ -22,13 +21,12 @@
       </article>
       <div class="principles"><article><b>1</b><h2>Solve</h2><p>Infer the missing fourth number.</p></article><article><b>2</b><h2>Abstract</h2><p>Encode the rule independently of surface values.</p></article><article><b>3</b><h2>Compare</h2><p>Recognize that same rule n trials back.</p></article></div>
     </section>
-
     <section id="play-view" class="view" hidden>
       <div class="heading"><p class="overline">SESSION SETTINGS</p><h1>Set the memory and auditory load</h1><p>Spoken premises use the same four-number series shown visually. Speech speed and inter-trial delay are controlled independently.</p></div>
       <article class="settings">
         <div class="grid">
           <label><span>N-back level</span><small>How many trials back the rule comparison reaches.</small><select id="n-back"><option value="1">1-back</option><option value="2" selected>2-back</option><option value="3">3-back</option><option value="4">4-back</option><option value="5">5-back</option></select></label>
-          <label><span>Session length</span><small>Choose a preset or enter any positive number of trials.</small><select id="trial-count"><option value="12">12 trials</option><option value="18">18 trials</option><option value="24" selected>24 trials</option><option value="36">36 trials</option><option value="custom">Custom…</option></select><input id="custom-trial-count" type="number" min="1" step="1" inputmode="numeric" placeholder="Enter number of trials" hidden /></label>
+          <label><span>Session length</span><small>Choose a preset, enter a custom total, or continue until you end the session.</small><select id="trial-count"><option value="12">12 trials</option><option value="18">18 trials</option><option value="24" selected>24 trials</option><option value="36">36 trials</option><option value="custom">Custom…</option><option value="infinite">Infinite</option></select><input id="custom-trial-count" type="number" min="1" step="1" inputmode="numeric" placeholder="Enter number of trials" hidden /></label>
           <label class="toggle"><span><strong>Spoken premises</strong><small>Speak every four-number series once at trial onset.</small></span><input id="spoken-premises" type="checkbox" /></label>
           <label><span>Premise speech speed</span><small>Controls how quickly each number series is spoken.</small><select id="speech-rate"><option value="0.55">Very slow</option><option value="0.7">Slow</option><option value="0.85" selected>Measured</option><option value="1">Normal</option><option value="1.2">Fast</option><option value="1.45">Very fast</option><option value="1.75">Extreme</option></select></label>
           <label><span>Delay between trials</span><small>Wait after Next before revealing and speaking the next series.</small><select id="trial-delay"><option value="0">No delay</option><option value="500">0.5 seconds</option><option value="1000">1 second</option><option value="2000">2 seconds</option><option value="3000">3 seconds</option><option value="5000">5 seconds</option><option value="8000">8 seconds</option><option value="10000">10 seconds</option></select></label>
@@ -36,25 +34,14 @@
         <div class="actions"><button id="start-game" class="primary" type="button">Start session</button></div>
       </article>
     </section>
-
     <section id="game-view" class="view" hidden>
       <div class="status"><div><strong id="trial-label">Trial 1 / 24</strong><div class="track"><span id="progress-bar"></span></div></div><div class="badges"><span id="n-badge">2-back</span><span id="score-badge">Score —</span></div></div>
-      <article class="trial-card">
-        <p class="overline">SOLVE THE SERIES</p>
-        <div id="series" class="series" aria-live="polite" aria-atomic="true"></div>
-        <p class="instruction">Select the number that completes the same generating rule.</p>
-        <div id="answer-options" class="answer-options"></div>
-      </article>
-      <article id="memory-card" class="memory-card">
-        <div><p class="overline">PATTERN N-BACK</p><h2 id="memory-question">Does this rule match the rule from 2 trials ago?</h2><p id="warmup-note"></p></div>
-        <div class="match-options"><button data-match="true" type="button">Pattern match</button><button data-match="false" type="button">Different pattern</button></div>
-      </article>
+      <article class="trial-card"><p class="overline">SOLVE THE SERIES</p><div id="series" class="series" aria-live="polite" aria-atomic="true"></div><p class="instruction">Select the number that completes the same generating rule.</p><div id="answer-options" class="answer-options"></div></article>
+      <article id="memory-card" class="memory-card"><div><p class="overline">PATTERN N-BACK</p><h2 id="memory-question">Does this rule match the rule from 2 trials ago?</h2><p id="warmup-note"></p></div><div class="match-options"><button data-match="true" type="button">Pattern match</button><button data-match="false" type="button">Different pattern</button></div></article>
       <div id="feedback" class="feedback" hidden aria-live="polite"></div>
       <div class="actions game-actions"><button id="end-game" class="text" type="button">End session</button><button id="submit-answer" class="primary" type="button" disabled>Check answers</button><button id="next-trial" class="primary" type="button" hidden>Next trial</button></div>
     </section>
-
     <section id="summary-view" class="view" hidden><article class="summary"><p class="overline">SESSION COMPLETE</p><h1 id="summary-heading">Pattern memory measured</h1><div id="total-score" class="total-score">0%</div><div id="summary-grid" class="summary-grid"></div><p id="summary-note"></p><div class="actions"><button id="train-again" class="primary" type="button">Train again</button><button data-view="progress" class="secondary" type="button">View progress</button></div></article></section>
-
     <section id="progress-view" class="view" hidden><div class="heading"><p class="overline">LOCAL PROGRESS</p><h1>Completed sessions</h1><p>Solution accuracy and pattern-memory accuracy remain separate.</p></div><div id="history-list" class="history-list"></div></section>
     <footer>Prototype rule families: constant addition, constant subtraction, multiplication, and division.</footer>
   </main>
