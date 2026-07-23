@@ -6,28 +6,29 @@
   <meta name="description" content="Number Pattern N-Back: infer each complete four-number series rule and recognize whether that rule matches n trials back." />
   <meta name="theme-color" content="#f5f7fb" />
   <title>Number Pattern N-Back</title>
-  <link rel="stylesheet" href="./styles.css?v=10" />
+  <link rel="stylesheet" href="./styles.css?v=11" />
   <style>
     #game-view .game-layout{display:block!important;position:relative!important}
     #game-view .game-main{width:100%!important;min-width:0!important}
-    #game-view .live-results-panel{position:fixed!important;left:8px!important;top:92px!important;width:min(520px,calc(100vw - 16px))!important;max-height:calc(100vh - 110px)!important;z-index:40!important;overflow:hidden!important;border-radius:16px!important;padding:10px!important;box-shadow:0 12px 30px rgba(41,55,90,.16)!important;background:rgba(255,255,255,.97)!important}
-    #game-view .live-results-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;padding-bottom:7px!important;border-bottom:1px solid var(--line)!important}
-    #game-view .live-results-heading .overline{margin:0!important;font-size:.58rem!important}
-    #game-view .live-results-heading h2{font-size:.9rem!important;margin:0!important}
+    #game-view .live-results-panel{position:fixed!important;left:8px!important;top:92px!important;width:260px!important;max-width:calc(100vw - 16px)!important;max-height:calc(100vh - 110px)!important;z-index:40!important;overflow:hidden!important;border-radius:14px!important;padding:8px!important;box-shadow:0 10px 24px rgba(41,55,90,.14)!important;background:rgba(255,255,255,.97)!important}
+    #game-view .live-results-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;padding-bottom:5px!important;border-bottom:1px solid var(--line)!important}
+    #game-view .live-results-heading .overline{margin:0!important;font-size:.54rem!important}
+    #game-view .live-results-heading h2{font-size:.82rem!important;margin:0!important}
     #game-view .live-results-heading p:last-child{display:none!important}
-    #game-view .live-trial-results{display:flex!important;flex-direction:column!important;gap:6px!important;max-height:calc(100vh - 165px)!important;overflow:auto!important;padding-top:7px!important}
-    #game-view .live-trial-result{display:grid!important;grid-template-columns:auto 1fr!important;align-items:center!important;gap:10px!important;padding:7px 9px!important;border:1px solid var(--line)!important;border-left-width:5px!important;border-radius:10px!important;background:#f8fafc!important}
+    #game-view .live-trial-results{display:flex!important;flex-direction:column!important;gap:4px!important;max-height:calc(100vh - 145px)!important;overflow:auto!important;padding-top:5px!important}
+    #game-view .live-trial-result{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;align-items:center!important;gap:7px!important;padding:5px 7px!important;border:1px solid var(--line)!important;border-left-width:4px!important;border-radius:8px!important;background:#f8fafc!important}
     #game-view .live-result-top{display:block!important}
-    #game-view .live-result-top strong{font-size:.68rem!important;white-space:nowrap!important}
+    #game-view .live-result-top strong{font-size:.62rem!important;white-space:nowrap!important}
     #game-view .live-result-top b{display:none!important}
-    #game-view .live-trial-result>span{display:block!important;margin:0!important;font-family:ui-monospace,SFMono-Regular,Consolas,monospace!important;font-size:.78rem!important;color:var(--ink)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+    #game-view .live-trial-result>span{display:block!important;margin:0!important;font-family:ui-monospace,SFMono-Regular,Consolas,monospace!important;font-size:.68rem!important;color:var(--ink)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
     #game-view .live-trial-result.match-correct{border-left-color:var(--success)!important;background:#eefaf4!important}
     #game-view .live-trial-result.no-match-correct,#game-view .live-trial-result.missed-no-match{border-left-color:#2563eb!important;background:#eff6ff!important}
     #game-view .live-trial-result.no-match-incorrect,#game-view .live-trial-result.match-incorrect,#game-view .live-trial-result.missed-match{border-left-color:var(--danger)!important;background:#fff2f4!important}
     @media(max-width:700px){
-      #game-view .live-results-panel{left:4px!important;top:82px!important;width:min(390px,calc(100vw - 8px))!important;padding:8px!important}
-      #game-view .live-trial-result{grid-template-columns:auto minmax(0,1fr)!important;gap:7px!important;padding:6px 7px!important}
-      #game-view .live-trial-result>span{font-size:.7rem!important}
+      #game-view .live-results-panel{left:4px!important;top:82px!important;width:220px!important;padding:6px!important}
+      #game-view .live-trial-result{gap:5px!important;padding:4px 6px!important}
+      #game-view .live-trial-result>span{font-size:.62rem!important}
+      #game-view .live-result-top strong{font-size:.58rem!important}
     }
   </style>
 </head>
@@ -82,6 +83,6 @@
     <section id="progress-view" class="view" hidden><div class="heading"><p class="overline">LOCAL PROGRESS</p><h1>Completed sessions</h1><p>Progress records only abstract pattern n-back accuracy.</p></div><div id="history-list" class="history-list"></div></section>
     <footer>Prototype rule families: constant addition, constant subtraction, multiplication, and division.</footer>
   </main>
-  <script type="module" src="./app-v7.js?v=10"></script>
+  <script type="module" src="./app-v7.js?v=11"></script>
 </body>
 </html>
