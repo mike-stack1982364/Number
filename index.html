@@ -6,7 +6,28 @@
   <meta name="description" content="Number Pattern N-Back: infer each complete four-number series rule and recognize whether that rule matches n trials back." />
   <meta name="theme-color" content="#f5f7fb" />
   <title>Number Pattern N-Back</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles.css?v=9" />
+  <style>
+    #game-view .game-layout{display:block!important;position:relative!important}
+    #game-view .game-main{width:100%!important;min-width:0!important}
+    #game-view .live-results-panel{position:fixed!important;left:8px!important;top:92px!important;width:220px!important;max-width:calc(100vw - 16px)!important;max-height:calc(100vh - 110px)!important;z-index:40!important;overflow:hidden!important;border-radius:16px!important;padding:12px!important;box-shadow:0 12px 30px rgba(41,55,90,.16)!important;background:rgba(255,255,255,.96)!important}
+    #game-view .live-results-heading h2{font-size:1rem!important;margin:0 0 3px!important}
+    #game-view .live-results-heading p:last-child{display:none!important}
+    #game-view .live-results-heading{padding-bottom:8px!important}
+    #game-view .live-trial-results{max-height:calc(100vh - 190px)!important;padding-top:8px!important;gap:6px!important}
+    #game-view .live-trial-result{padding:8px!important;border-radius:10px!important}
+    #game-view .live-trial-result>span{font-size:.72rem!important}
+    #game-view .live-result-top strong,#game-view .live-result-top b{font-size:.68rem!important}
+    @media(max-width:900px){
+      #game-view .live-results-panel{width:170px!important;top:82px!important;padding:9px!important}
+      #game-view .live-results-heading .overline{font-size:.58rem!important}
+      #game-view .live-results-heading h2{font-size:.88rem!important}
+    }
+    @media(max-width:600px){
+      #game-view .live-results-panel{left:4px!important;width:142px!important;max-height:42vh!important}
+      #game-view .live-trial-results{max-height:calc(42vh - 62px)!important}
+    }
+  </style>
 </head>
 <body>
   <main class="shell">
@@ -36,10 +57,6 @@
     </section>
     <section id="game-view" class="view" hidden>
       <div class="game-layout">
-        <aside class="live-results-panel" aria-label="Live trial results">
-          <div class="live-results-heading"><p class="overline">TRIAL RESULTS</p><h2>Live record</h2><p>Results append from the top as each scored trial completes.</p></div>
-          <div id="live-trial-results" class="live-trial-results" aria-live="polite"></div>
-        </aside>
         <div class="game-main">
           <div class="status"><div><strong id="trial-label">Trial 1 / 24</strong><div class="track"><span id="progress-bar"></span></div></div><div class="badges"><span id="n-badge">2-back</span><span id="score-badge">Score —</span></div></div>
           <article class="trial-card"><p class="overline">INFER THE HIDDEN RULE</p><div id="series" class="series" aria-live="polite" aria-atomic="true"></div><p class="instruction">Infer and retain the pattern internally. Do not enter the missing number or name the rule.</p></article>
@@ -47,6 +64,10 @@
           <div id="feedback" class="feedback" hidden aria-live="polite"></div>
           <div class="actions game-actions"><button id="end-game" class="text" type="button">End session</button><button id="submit-answer" class="primary" type="button" disabled>Check response</button><button id="next-trial" class="primary" type="button" hidden>Next trial</button></div>
         </div>
+        <aside class="live-results-panel" aria-label="Live trial results">
+          <div class="live-results-heading"><p class="overline">TRIAL RESULTS</p><h2>Live record</h2><p>Results append from the top as each scored trial completes.</p></div>
+          <div id="live-trial-results" class="live-trial-results" aria-live="polite"></div>
+        </aside>
       </div>
     </section>
     <section id="summary-view" class="view" hidden>
@@ -59,6 +80,6 @@
     <section id="progress-view" class="view" hidden><div class="heading"><p class="overline">LOCAL PROGRESS</p><h1>Completed sessions</h1><p>Progress records only abstract pattern n-back accuracy.</p></div><div id="history-list" class="history-list"></div></section>
     <footer>Prototype rule families: constant addition, constant subtraction, multiplication, and division.</footer>
   </main>
-  <script type="module" src="./app-v7.js"></script>
+  <script type="module" src="./app-v7.js?v=9"></script>
 </body>
 </html>
