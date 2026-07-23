@@ -15,15 +15,16 @@ const state = { settings: load(STORAGE_KEYS.settings, DEFAULTS), history: load(S
 const views = ["home", "play", "game", "summary", "progress"];
 const $ = (selector) => document.querySelector(selector);
 const els = {
-  homeButton: $("#home-button"), begin: $("#begin-button"), start: $("#start-game"), nBack: $("#n-back"), trialCount: $("#trial-count"), spoken: $("#spoken-premises"), speechRate: $("#speech-rate"), trialDelay: $("#trial-delay"),
+  homeButton: $("#home-button"), begin: $("#begin-button"), start: $("#start-game"), nBack: $("#n-back"), trialCount: $("#trial-count"), customTrialCount: $("#custom-trial-count"), spoken: $("#spoken-premises"), speechRate: $("#speech-rate"), trialDelay: $("#trial-delay"),
   trialLabel: $("#trial-label"), progressBar: $("#progress-bar"), nBadge: $("#n-badge"), scoreBadge: $("#score-badge"), series: $("#series"), answerOptions: $("#answer-options"), memoryCard: $("#memory-card"), memoryQuestion: $("#memory-question"), warmupNote: $("#warmup-note"), feedback: $("#feedback"), submit: $("#submit-answer"), next: $("#next-trial"), end: $("#end-game"), summaryHeading: $("#summary-heading"), totalScore: $("#total-score"), summaryGrid: $("#summary-grid"), summaryNote: $("#summary-note"), trainAgain: $("#train-again"), historyList: $("#history-list"),
 };
 
 initialize();
 
 function initialize() {
-  els.nBack.value = String(state.settings.nBack); els.trialCount.value = String(state.settings.trialCount); els.spoken.checked = Boolean(state.settings.spoken); els.speechRate.value = String(state.settings.speechRate); els.trialDelay.value = String(state.settings.trialDelayMs);
-  document.addEventListener("click", handleClick); els.homeButton.addEventListener("click", () => show("home")); els.begin.addEventListener("click", () => show("play")); els.start.addEventListener("pointerdown", primeSpeech); els.start.addEventListener("click", startSession); els.submit.addEventListener("click", submitTrial); els.next.addEventListener("click", requestNextTrial); els.end.addEventListener("click", endEarly); els.trainAgain.addEventListener("click", () => show("play"));
+  setTrialCountUi(state.settings.trialCount);
+  els.nBack.value = String(state.settings.nBack); els.spoken.checked = Boolean(state.settings.spoken); els.speechRate.value = String(state.settings.speechRate); els.trialDelay.value = String(state.settings.trialDelayMs);
+  document.addEventListener("click", handleClick); els.homeButton.addEventListener("click", () => show("home")); els.begin.addEventListener("click", () => show("play")); els.start.addEventListener("pointerdown", primeSpeech); els.start.addEventListener("click", startSession); els.submit.addEventListener("click", submitTrial); els.next.addEventListener("click", requestNextTrial); els.end.addEventListener("click", endEarly); els.trainAgain.addEventListener("click", () => show("play")); els.trialCount.addEventListener("change", syncCustomTrialInput);
   show("home");
 }
 
@@ -39,10 +40,14 @@ function handleClick(event) {
 }
 
 function selectOnly(container, selected) { container.querySelectorAll("button").forEach((button) => button.classList.toggle("selected", button === selected)); }
-function settingsFromUi() { return { nBack: Number(els.nBack.value), trialCount: Number(els.trialCount.value), spoken: els.spoken.checked, speechRate: Number(els.speechRate.value), trialDelayMs: Number(els.trialDelay.value) }; }
+function setTrialCountUi(count) { const preset = [...els.trialCount.options].some((option) => option.value === String(count)); els.trialCount.value = preset ? String(count) : "custom"; els.customTrialCount.hidden = preset; els.customTrialCount.value = preset ? "" : String(count); }
+function syncCustomTrialInput() { const custom = els.trialCount.value === "custom"; els.customTrialCount.hidden = !custom; if (custom) { if (!els.customTrialCount.value) els.customTrialCount.value = String(state.settings.trialCount || 24); els.customTrialCount.focus(); } }
+function readTrialCount() { const value = els.trialCount.value === "custom" ? Number(els.customTrialCount.value) : Number(els.trialCount.value); if (!Number.isInteger(value) || value < 1) { els.customTrialCount.hidden = false; els.customTrialCount.focus(); throw new Error("Enter a whole number of trials greater than zero."); } return value; }
+function settingsFromUi() { return { nBack: Number(els.nBack.value), trialCount: readTrialCount(), spoken: els.spoken.checked, speechRate: Number(els.speechRate.value), trialDelayMs: Number(els.trialDelay.value) }; }
 
 function startSession() {
-  state.settings = settingsFromUi(); save(STORAGE_KEYS.settings, state.settings); state.session = generateSession(state.settings.trialCount, state.settings.nBack); state.index = 0; state.results = []; state.locked = false; show("game"); renderTrial();
+  try { state.settings = settingsFromUi(); } catch (error) { window.alert(error.message); return; }
+  save(STORAGE_KEYS.settings, state.settings); state.session = generateSession(state.settings.trialCount, state.settings.nBack); state.index = 0; state.results = []; state.locked = false; show("game"); renderTrial();
 }
 
 function generateSession(count, nBack) {
